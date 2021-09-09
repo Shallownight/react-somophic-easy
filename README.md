@@ -24,3 +24,7 @@
 | ——————      | [同构07 - 思路整理](https://www.yuque.com/sbvv3s/wxzhm7/hqq8ix) |
 | 2daeeb3     | [同构08 - 服务端打包入口切换](https://www.yuque.com/sbvv3s/wxzhm7/drhd4y) |
 | 706bcd4     | [同构09 - 创建开发服务并自动更新服务端代码](https://www.yuque.com/sbvv3s/wxzhm7/wfz9b2) |
+
+## hacky
+hotMiddleware 对webpack5的支持有问题，暂时先直接将hot-middle-ware中的process-update改一下：
+ignoreUnaccepted: true => false

@@ -1,4 +1,4 @@
-const pages = require('../build/pages');
+const pages = require('../build/pages').pagesList;
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
@@ -8,17 +8,12 @@ const pageMap = pages.reduce((acc, page) => {
     return acc
 }, {});
 
-function loadScript(page) {
-    return `<script src="dll/vendors.dll.js"></script><script src="client/${page}.js"></script>`
-}
-
 function routes(app) {
     app.get('/:page.html', function(req, res, next) {
         const page = req.params.page;
         if (!pages.includes(page)) {
-            res.render('template', {
-                content: 404,
-                script: null,
+            res.render(page, {
+                content: 404
             })
         }
 
@@ -27,9 +22,8 @@ function routes(app) {
             React.createElement(pageMap[page])
         );
 
-        res.render('template', {
-            content: contentHtml,
-            script: loadScript(page),
+        res.render(page, {
+            content: contentHtml
         })
     })
 }

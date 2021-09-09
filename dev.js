@@ -69,7 +69,11 @@ webpack(webpackServerConfig).watch(300, function(err, stats) {
 
         // 通过webpack-dev-middleware监听客户端变化，实时更新
         const devMiddleware = webpackDevMiddleware(clientCompiler, {
-            publicPath: '/client'
+            publicPath: '/client',
+            // html模板文件需要写在磁盘上，不然ssr读不到
+            writeToDisk: function (filePath) {
+                return /\.html?$/.test(filePath);
+            },
         });
 
         const hotMiddleware = webpackHotMiddleware(clientCompiler, {
@@ -77,6 +81,8 @@ webpack(webpackServerConfig).watch(300, function(err, stats) {
         })
 
         server.use(devMiddleware);
+        // *** hotMiddleware 对webpack5的支持有问题，暂时先直接将hot-middle-ware中的process-update改一下：
+        // ignoreUnaccepted: true => false
         server.use(hotMiddleware);
 
         const PORT = 5000;

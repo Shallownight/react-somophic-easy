@@ -8,7 +8,8 @@
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js",
     "build": "npm run build:server && npm run build:client",
     "dll": "webpack --config build/webpack.dll.config.js",
-    "dev": "node dev.js"
+    "dev": "node dev.js",
+    "clean": "rm -rf dist/client dist/server dist/views"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,8 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
     "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "raw-loader": "^4.0.2",
     "style-loader": "^3.2.1",
     "webpack": "^5.52.0",
     "webpack-cli": "^4.8.0",
